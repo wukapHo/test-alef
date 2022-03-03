@@ -1,6 +1,9 @@
 <template>
   <personal-data />
   <children-data />
+  <div class="save">
+    <button class="save__btn">Сохранить</button>
+  </div>
 </template>
 
 <script>
@@ -16,3 +19,30 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.save {
+  max-width: 616px;
+  margin: 30px auto;
+
+  &__btn {
+    width: 118px;
+    height: 44px;
+    background: #01a7fd;
+    border: none;
+    border-radius: 100px;
+    outline: none;
+    color: #ffffff;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+      background: #0f79af;
+    }
+
+    &:active {
+      transform: scale(1.05);
+    }
+  }
+}
+</style>
