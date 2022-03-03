@@ -18,10 +18,6 @@ export default {
     HeaderApp,
     FooterApp,
   },
-
-  data() {
-    return {};
-  },
 };
 </script>
 
@@ -36,12 +32,14 @@ export default {
   font-family: "Montserrat", sans-serif;
   font-weight: 400;
   font-size: 14px;
+  line-height: 24px;
   color: #111111;
   text-decoration: none;
 }
 
 .container {
   max-width: 1366px;
+  min-height: calc(100vh - 76px);
   padding: 0 20px;
   margin: 0 auto;
 }

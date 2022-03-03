@@ -132,8 +132,8 @@ export default {
 
   &__nav-item {
     margin-left: 24px;
-    opacity: 0.8;
-    transition: 0.3s;
+    opacity: 0.7;
+    transition: 0.2s;
 
     &:hover {
       opacity: 1;
