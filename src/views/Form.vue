@@ -20,7 +20,7 @@
     />
   </section>
   <div class="save">
-    <button class="save__btn">Сохранить</button>
+    <button @click="reset" class="save__btn">Сбросить</button>
   </div>
 </template>
 
@@ -100,6 +100,11 @@ export default {
           this.$refs.add.disabled = false;
         });
       }
+    },
+    reset() {
+      this.personalData = { name: "", age: "" };
+      this.childrenData = [];
+      localStorage.clear();
     },
   },
 
