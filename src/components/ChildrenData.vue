@@ -18,6 +18,7 @@
           <input
             v-model="childrenList[idx].name"
             :id="'name-' + `${idx}`"
+            @change="saveData()"
             @input="updateButton"
             class="personal__input"
             type="text"
@@ -31,7 +32,12 @@
           <input
             v-model="childrenList[idx].age"
             :id="'age-' + `${idx}`"
-            @change="validateAge(idx)"
+            @change="
+              {
+                validateAge(idx);
+                saveData();
+              }
+            "
             @input="updateButton"
             class="personal__input personal__input--number"
             type="number"
@@ -53,20 +59,32 @@
 export default {
   name: "ChildrenData",
 
+  emits: {
+    "change-children": null,
+  },
+
   data() {
     return {
       childrenList: [],
     };
   },
 
+  created() {
+    const childrenData = localStorage.getItem("children-data");
+
+    if (childrenData) {
+      this.childrenList = JSON.parse(childrenData);
+    }
+  },
+
   methods: {
     addChild() {
-      this.childrenList.push({ name: "", age: null });
+      this.childrenList.push({ name: "", age: "" });
       const length = this.childrenList.length;
       if (
         length > 0 &&
         (this.childrenList[length - 1].name === "" ||
-          this.childrenList[length - 1].age === null)
+          this.childrenList[length - 1].age === "")
       ) {
         this.$refs.add.disabled = true;
         return;
@@ -77,7 +95,7 @@ export default {
       this.childrenList = this.childrenList.filter((c) => c !== child);
       if (
         length === 0 ||
-        this.childrenList.every((c) => c.name !== "" && c.age !== null)
+        this.childrenList.every((c) => c.name !== "" && c.age !== "")
       ) {
         this.$nextTick().then(() => {
           this.$refs.add.disabled = false;
@@ -96,10 +114,13 @@ export default {
       if (length === 5) return;
       if (
         this.childrenList[length - 1].name !== "" &&
-        this.childrenList[length - 1].age !== null
+        this.childrenList[length - 1].age !== ""
       ) {
         this.$refs.add.disabled = false;
       }
+    },
+    saveData() {
+      this.$emit("change-children", this.childrenList);
     },
   },
 };

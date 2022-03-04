@@ -6,10 +6,16 @@
         {{ personalData.name }}, {{ personalData.age }} лет
       </p>
     </div>
-    <div>
+    <div v-if="childrenData.length > 0">
       <h2 class="preview__title preview__title--bottom">Дети</h2>
       <div class="preview__children">
-        <div class="preview__child preview__desc">Петр, 14 лет</div>
+        <div
+          v-for="(c, idx) in childrenData"
+          :key="idx"
+          class="preview__child preview__desc"
+        >
+          {{ childrenData[idx].name }}, {{ childrenData[idx].age }} лет
+        </div>
       </div>
     </div>
   </div>
@@ -22,14 +28,19 @@ export default {
   data() {
     return {
       personalData: null,
+      childrenData: [],
     };
   },
 
   created() {
     const personalData = localStorage.getItem("personal-data");
+    const childrenData = localStorage.getItem("children-data");
 
     if (personalData) {
       this.personalData = JSON.parse(personalData);
+    }
+    if (childrenData) {
+      this.childrenData = JSON.parse(childrenData);
     }
   },
 };

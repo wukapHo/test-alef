@@ -1,6 +1,6 @@
 <template>
   <personal-data @change-personal="savePersonal($event)" />
-  <children-data />
+  <children-data @change-children="saveChildren($event)" />
   <div class="save">
     <button class="save__btn">Сохранить</button>
   </div>
@@ -18,16 +18,12 @@ export default {
     ChildrenData,
   },
 
-  // data() {
-  //   return {
-  //     repsonalData: {},
-  //     childrenData: [],
-  //   };
-  // },
-
   methods: {
     savePersonal(data) {
       localStorage.setItem("personal-data", JSON.stringify(data));
+    },
+    saveChildren(data) {
+      localStorage.setItem("children-data", JSON.stringify(data));
     },
   },
 };
