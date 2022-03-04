@@ -120,10 +120,18 @@ export default {
   justify-content: center;
   position: relative;
 
+  @media (max-width: 768px) {
+    justify-content: flex-end;
+  }
+
   &__logo {
     position: absolute;
     top: 24px;
     left: 92px;
+
+    @media (max-width: 768px) {
+      left: 0;
+    }
   }
 
   &__nav {

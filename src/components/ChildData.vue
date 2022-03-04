@@ -22,7 +22,9 @@
         placeholder="Введите возраст..."
       />
     </div>
-    <button @click="deleteChild" class="child__delete-btn">Удалить</button>
+    <button @click="deleteChild" class="child__delete-btn">
+      <span class="to-be-hidden">Удалить</span>
+    </button>
   </div>
 </template>
 
@@ -88,10 +90,15 @@ export default {
     flex-direction: column;
     border: 1px solid #f1f1f1;
     border-radius: 4px;
+
+    @media (max-width: 420px) {
+      margin-right: 0;
+    }
   }
 
   &__delete-btn {
     height: 56px;
+    min-width: 56px;
     border: none;
     border-radius: 4px;
     outline: none;
@@ -101,12 +108,26 @@ export default {
     opacity: 0.7;
     transition: 0.3s;
 
+    @media (max-width: 768px) {
+      background: url("../assets/plus-icon.svg") no-repeat center;
+      background-size: 60%;
+      transform: rotate(45deg);
+
+      .to-be-hidden {
+        display: none;
+      }
+    }
+
     &:hover {
       opacity: 1;
     }
 
     &:active {
       transform: scale(1.1);
+    }
+
+    .to-be-hidden {
+      color: #01a7fd;
     }
   }
 }
