@@ -4,8 +4,13 @@
     <div class="personal__item">
       <label class="personal__label" for="name">Имя</label>
       <input
-        v-model="name"
-        @change="saveData"
+        :value="modelValue.name ?? ''"
+        @input="
+          $emit('update:modelValue', {
+            ...modelValue,
+            name: $event.target.value,
+          })
+        "
         class="personal__input"
         id="name"
         type="text"
@@ -15,13 +20,14 @@
     <div class="personal__item">
       <label class="personal__label" for="age">Возраст</label>
       <input
-        v-model="age"
-        @change="
-          {
-            validateAge();
-            saveData();
-          }
+        :value="modelValue.age ?? ''"
+        @input="
+          $emit('update:modelValue', {
+            ...modelValue,
+            age: $event.target.value,
+          })
         "
+        @change="updateAge($event.target.value)"
         class="personal__input personal__input--number"
         id="age"
         type="number"
@@ -35,36 +41,30 @@
 export default {
   name: "PersonalData",
 
+  props: {
+    modelValue: {
+      type: Object,
+      default() {
+        return {
+          name: "",
+          age: "",
+        };
+      },
+    },
+  },
+
   emits: {
-    "change-personal": null,
-  },
-
-  data() {
-    return {
-      name: "",
-      age: "",
-    };
-  },
-
-  created() {
-    const personalData = localStorage.getItem("personal-data");
-
-    if (personalData) {
-      this.name = JSON.parse(personalData).name;
-      this.age = JSON.parse(personalData).age;
-    }
+    "update:modelValue": null,
   },
 
   methods: {
-    validateAge() {
-      if (this.age < 18) {
-        this.age = 18;
-      } else if (this.age > 99) {
-        this.age = 99;
+    updateAge(data) {
+      if (data < 1) {
+        data = 1;
+      } else if (data > 99) {
+        data = 99;
       }
-    },
-    saveData() {
-      this.$emit("change-personal", { name: this.name, age: this.age });
+      this.$emit("update:modelValue", { ...this.modelValue, age: data });
     },
   },
 };

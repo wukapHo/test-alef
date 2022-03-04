@@ -1,5 +1,5 @@
 <template>
-  <personal-data @change-personal="savePersonal($event)" />
+  <personal-data v-model="personalData" />
   <children-data @change-children="saveChildren($event)" />
   <div class="save">
     <button class="save__btn">Сохранить</button>
@@ -18,12 +18,31 @@ export default {
     ChildrenData,
   },
 
+  data() {
+    return {
+      personalData: { name: "", age: "" },
+      childrenData: [],
+    };
+  },
+
+  created() {
+    const personalData = localStorage.getItem("personal-data");
+
+    if (personalData) {
+      this.personalData.name = JSON.parse(personalData).name;
+      this.personalData.age = JSON.parse(personalData).age;
+    }
+  },
+
   methods: {
-    savePersonal(data) {
-      localStorage.setItem("personal-data", JSON.stringify(data));
-    },
     saveChildren(data) {
       localStorage.setItem("children-data", JSON.stringify(data));
+    },
+  },
+
+  watch: {
+    personalData() {
+      localStorage.setItem("personal-data", JSON.stringify(this.personalData));
     },
   },
 };
