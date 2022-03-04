@@ -1,5 +1,5 @@
 # test-alef
-[Deploy Link](alef-test.netlify.app).
+[Deploy Link](https://alef-test.netlify.app/).
 
 ## Project setup
 ```
