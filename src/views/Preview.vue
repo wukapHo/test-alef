@@ -3,18 +3,19 @@
     <div v-if="personalData">
       <h2 class="preview__title">Персональные данные</h2>
       <p class="preview__desc">
-        {{ personalData.name }}, {{ personalData.age }} лет
+        {{ personalData.name }}, {{ normalizeAge(personalData.age) }}
       </p>
     </div>
-    <div v-if="childrenData.length > 0">
+    <div v-if="normalizedChildrenData.length > 0">
       <h2 class="preview__title preview__title--bottom">Дети</h2>
       <div class="preview__children">
         <div
-          v-for="(c, idx) in childrenData"
+          v-for="(c, idx) in normalizedChildrenData"
           :key="idx"
           class="preview__child preview__desc"
         >
-          {{ childrenData[idx].name }}, {{ childrenData[idx].age }} лет
+          {{ normalizedChildrenData[idx].name }},
+          {{ normalizeAge(normalizedChildrenData[idx].age) }}
         </div>
       </div>
     </div>
@@ -42,6 +43,34 @@ export default {
     if (childrenData) {
       this.childrenData = JSON.parse(childrenData);
     }
+  },
+
+  computed: {
+    normalizedChildrenData() {
+      return this.childrenData.filter(
+        (item) => item.name !== "" && item.age !== null
+      );
+    },
+  },
+
+  methods: {
+    normalizeAge(value) {
+      let txt;
+      let count = value % 100;
+      if (count >= 5 && count <= 20) {
+        txt = "лет";
+      } else {
+        count = count % 10;
+        if (count == 1) {
+          txt = "год";
+        } else if (count >= 2 && count <= 4) {
+          txt = "года";
+        } else {
+          txt = "лет";
+        }
+      }
+      return `${value} ${txt}`;
+    },
   },
 };
 </script>
