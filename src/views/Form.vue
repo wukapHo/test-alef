@@ -1,5 +1,5 @@
 <template>
-  <personal-data />
+  <personal-data @change-personal="savePersonal($event)" />
   <children-data />
   <div class="save">
     <button class="save__btn">Сохранить</button>
@@ -16,6 +16,19 @@ export default {
   components: {
     PersonalData,
     ChildrenData,
+  },
+
+  // data() {
+  //   return {
+  //     repsonalData: {},
+  //     childrenData: [],
+  //   };
+  // },
+
+  methods: {
+    savePersonal(data) {
+      localStorage.setItem("personal-data", JSON.stringify(data));
+    },
   },
 };
 </script>

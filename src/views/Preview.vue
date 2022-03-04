@@ -1,13 +1,39 @@
 <template>
   <div class="preview">
-    <h2 class="preview__title">Персональные данные</h2>
-    <p class="preview__desc">Василий, 30 лет</p>
-    <h2 class="preview__title preview__title--bottom">Дети</h2>
-    <div class="preview__children">
-      <div class="preview__child preview__desc">Петр, 14 лет</div>
+    <div v-if="personalData">
+      <h2 class="preview__title">Персональные данные</h2>
+      <p class="preview__desc">
+        {{ personalData.name }}, {{ personalData.age }} лет
+      </p>
+    </div>
+    <div>
+      <h2 class="preview__title preview__title--bottom">Дети</h2>
+      <div class="preview__children">
+        <div class="preview__child preview__desc">Петр, 14 лет</div>
+      </div>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  name: "Preview",
+
+  data() {
+    return {
+      personalData: null,
+    };
+  },
+
+  created() {
+    const personalData = localStorage.getItem("personal-data");
+
+    if (personalData) {
+      this.personalData = JSON.parse(personalData);
+    }
+  },
+};
+</script>
 
 <style lang="scss">
 .preview {

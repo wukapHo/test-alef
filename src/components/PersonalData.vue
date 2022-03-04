@@ -5,6 +5,7 @@
       <label class="personal__label" for="name">Имя</label>
       <input
         v-model="name"
+        @change="saveData"
         class="personal__input"
         id="name"
         type="text"
@@ -15,7 +16,12 @@
       <label class="personal__label" for="age">Возраст</label>
       <input
         v-model="age"
-        @change="validateAge"
+        @change="
+          {
+            validateAge();
+            saveData();
+          }
+        "
         class="personal__input personal__input--number"
         id="age"
         type="number"
@@ -29,11 +35,24 @@
 export default {
   name: "PersonalData",
 
+  emits: {
+    "change-personal": null,
+  },
+
   data() {
     return {
       name: "",
-      age: null,
+      age: "",
     };
+  },
+
+  created() {
+    const personalData = localStorage.getItem("personal-data");
+
+    if (personalData) {
+      this.name = JSON.parse(personalData).name;
+      this.age = JSON.parse(personalData).age;
+    }
   },
 
   methods: {
@@ -43,6 +62,9 @@ export default {
       } else if (this.age > 99) {
         this.age = 99;
       }
+    },
+    saveData() {
+      this.$emit("change-personal", { name: this.name, age: this.age });
     },
   },
 };

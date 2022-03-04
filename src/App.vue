@@ -37,17 +37,17 @@ export default {
   text-decoration: none;
 }
 
-.container {
-  max-width: 1366px;
-  min-height: calc(100vh - 76px);
-  padding: 0 20px;
-  margin: 0 auto;
-}
-
 .line {
   width: 100%;
   height: 76px;
   position: absolute;
   box-shadow: 0px 1px 0px rgba(17, 17, 17, 0.1);
+}
+
+.container {
+  max-width: 1366px;
+  min-height: calc(100vh - 76px);
+  padding: 0 20px;
+  margin: 0 auto;
 }
 </style>
