@@ -6,7 +6,13 @@
         ref="input"
         :id="'name-' + modelValue.id"
         :value="modelValue.name"
-        @input="updateName($event.target.value)"
+        @input="
+          $emit('update:modelValue', {
+            ...modelValue,
+            name: $event.target.value,
+          })
+        "
+        @change="validationName($event.target.value)"
         class="personal__input"
         type="text"
         placeholder="Введите имя..."
@@ -19,7 +25,13 @@
       <input
         :id="'age-' + modelValue.id"
         :value="modelValue.age"
-        @change="updateAge($event.target.value)"
+        @input="
+          $emit('update:modelValue', {
+            ...modelValue,
+            age: +$event.target.value,
+          })
+        "
+        @change="validationAge($event.target.value)"
         class="personal__input personal__input--number"
         type="number"
         placeholder="Введите возраст..."
@@ -51,18 +63,20 @@ export default {
   emits: {
     "update:modelValue": null,
     "delete-child": null,
-    "render-input": null,
   },
 
   mounted() {
-    this.$emit("render-input", this.$refs.input);
+    this.$refs.input.focus();
   },
 
   methods: {
-    updateName(value) {
-      this.$emit("update:modelValue", { ...this.modelValue, name: value });
+    validationName(data) {
+      if (data.length > 20) {
+        data = data.slice(0, 21);
+      }
+      this.$emit("update:modelValue", { ...this.modelValue, name: data });
     },
-    updateAge(value) {
+    validationAge(value) {
       if (value < 1) {
         value = 1;
       } else if (value > 99) {

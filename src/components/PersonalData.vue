@@ -12,6 +12,7 @@
             name: $event.target.value,
           })
         "
+        @change="validationName($event.target.value)"
         class="personal__input"
         id="name"
         type="text"
@@ -67,6 +68,12 @@ export default {
   },
 
   methods: {
+    validationName(data) {
+      if (data.length > 20) {
+        data = data.slice(0, 21);
+      }
+      this.$emit("update:modelValue", { ...this.modelValue, name: data });
+    },
     validationAge(data) {
       if (data < 1) {
         data = 1;

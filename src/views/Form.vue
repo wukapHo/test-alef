@@ -16,7 +16,6 @@
       v-for="(child, idx) in childrenData"
       :key="child.id"
       @delete-child="deleteChild($event)"
-      @render-input="$event.focus()"
       v-model="childrenData[idx]"
     />
   </section>
