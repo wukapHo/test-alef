@@ -2,6 +2,7 @@
   <div class="line"></div>
   <div class="container">
     <app-header />
+    <h1 class="visually-hidden">Alef Test</h1>
     <router-view />
   </div>
   <app-footer />
@@ -49,5 +50,16 @@ export default {
   min-height: calc(100vh - 76px);
   padding: 0 20px;
   margin: 0 auto;
+}
+
+.visually-hidden {
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(0px 0px 99.9% 99.9%);
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
 }
 </style>
