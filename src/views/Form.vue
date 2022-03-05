@@ -38,7 +38,7 @@ export default {
 
   data() {
     return {
-      personalData: { name: "", age: "" },
+      personalData: { name: "", age: null },
       childrenData: [],
       maxChildren: 5,
     };
@@ -102,7 +102,7 @@ export default {
       }
     },
     reset() {
-      this.personalData = { name: "", age: "" };
+      this.personalData = { name: "", age: null };
       this.childrenData = [];
       localStorage.clear();
     },

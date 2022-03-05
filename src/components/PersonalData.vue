@@ -4,7 +4,7 @@
     <div class="personal__item">
       <label class="personal__label" for="name">Имя</label>
       <input
-        :value="modelValue.name ?? ''"
+        :value="modelValue.name"
         @input="
           $emit('update:modelValue', {
             ...modelValue,
@@ -20,14 +20,14 @@
     <div class="personal__item">
       <label class="personal__label" for="age">Возраст</label>
       <input
-        :value="modelValue.age ?? ''"
+        :value="modelValue.age"
         @input="
           $emit('update:modelValue', {
             ...modelValue,
-            age: $event.target.value,
+            age: +$event.target.value,
           })
         "
-        @change="updateAge($event.target.value)"
+        @change="validationAge($event.target.value)"
         class="personal__input personal__input--number"
         id="age"
         type="number"
@@ -47,7 +47,7 @@ export default {
       default() {
         return {
           name: "",
-          age: "",
+          age: null,
         };
       },
     },
@@ -58,13 +58,13 @@ export default {
   },
 
   methods: {
-    updateAge(data) {
+    validationAge(data) {
       if (data < 1) {
         data = 1;
       } else if (data > 99) {
         data = 99;
       }
-      this.$emit("update:modelValue", { ...this.modelValue, age: data });
+      this.$emit("update:modelValue", { ...this.modelValue, age: +data });
     },
   },
 };
