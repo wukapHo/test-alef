@@ -1,6 +1,6 @@
 <template>
   <div class="preview">
-    <div v-if="personalData.name !== ''">
+    <div v-if="personalData.name !== '' && personalData.age !== null">
       <h2 class="preview__title">Персональные данные</h2>
       <p class="preview__desc">
         {{ personalData.name }}, {{ normalizeAge(personalData.age) }}

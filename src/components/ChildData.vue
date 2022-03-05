@@ -3,6 +3,7 @@
     <div class="child__input">
       <label :for="'name-' + modelValue.id" class="personal__label">Имя</label>
       <input
+        ref="input"
         :id="'name-' + modelValue.id"
         :value="modelValue.name"
         @input="updateName($event.target.value)"
@@ -50,6 +51,11 @@ export default {
   emits: {
     "update:modelValue": null,
     "delete-child": null,
+    "render-input": null,
+  },
+
+  mounted() {
+    this.$emit("render-input", this.$refs.input);
   },
 
   methods: {

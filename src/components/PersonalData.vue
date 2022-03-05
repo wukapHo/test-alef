@@ -4,6 +4,7 @@
     <div class="personal__item">
       <label class="personal__label" for="name">Имя</label>
       <input
+        ref="input"
         :value="modelValue.name"
         @input="
           $emit('update:modelValue', {
@@ -55,6 +56,14 @@ export default {
 
   emits: {
     "update:modelValue": null,
+  },
+
+  mounted() {
+    if (this.$refs.input.value === "") {
+      this.$nextTick().then(() => {
+        this.$refs.input.focus();
+      });
+    }
   },
 
   methods: {
