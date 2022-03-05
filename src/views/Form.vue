@@ -4,8 +4,8 @@
     <div class="children__wrapper">
       <h2 class="children__title">Дети (макс. 5)</h2>
       <button
-        ref="add"
         v-if="childrenData.length < maxChildren"
+        :disabled="isDisabled"
         @click="addChild"
         class="children__add-btn"
       >
@@ -54,14 +54,17 @@ export default {
     if (childrenData) {
       this.childrenData = JSON.parse(childrenData);
     }
+  },
 
-    if (
-      this.childrenData.some((item) => item.name === "" || item.age === null)
-    ) {
-      this.$nextTick().then(() => {
-        this.$refs.add.disabled = true;
-      });
-    }
+  computed: {
+    isDisabled() {
+      if (this.childrenData.length === 0) return false;
+
+      const { name, age } = this.childrenData[this.childrenData.length - 1];
+      if (!name || !age) return true;
+
+      return false;
+    },
   },
 
   methods: {
@@ -71,35 +74,11 @@ export default {
         ...this.childrenData,
         { name: "", age: null, id: id },
       ];
-
-      const length = this.childrenData.length;
-      if (
-        length > 0 &&
-        (this.childrenData[length - 1].name === "" ||
-          this.childrenData[length - 1].age === "")
-      ) {
-        this.$refs.add.disabled = true;
-        return;
-      }
     },
     deleteChild(item) {
       this.childrenData = this.childrenData.filter(
         (child) => child.id !== item.id
       );
-      this.updateButton();
-    },
-    updateButton() {
-      const length = this.childrenData.length;
-      if (length === 5) return;
-      if (
-        this.childrenData.every(
-          (child) => child.name !== "" && child.age !== null
-        )
-      ) {
-        this.$nextTick().then(() => {
-          this.$refs.add.disabled = false;
-        });
-      }
     },
     reset() {
       this.personalData = { name: "", age: null };
@@ -116,7 +95,6 @@ export default {
       deep: true,
 
       handler() {
-        this.updateButton();
         localStorage.setItem(
           "children-data",
           JSON.stringify(this.childrenData)
