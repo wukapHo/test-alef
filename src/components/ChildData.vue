@@ -1,9 +1,9 @@
 <template>
   <div class="child">
     <div class="child__input">
-      <label :for="'name-' + id" class="personal__label">Имя</label>
+      <label :for="'name-' + modelValue.id" class="personal__label">Имя</label>
       <input
-        :id="'name-' + id"
+        :id="'name-' + modelValue.id"
         :value="modelValue.name"
         @input="updateName($event.target.value)"
         class="personal__input"
@@ -12,9 +12,11 @@
       />
     </div>
     <div class="child__input">
-      <label :for="'age-' + id" class="personal__label">Возраст</label>
+      <label :for="'age-' + modelValue.id" class="personal__label">
+        Возраст</label
+      >
       <input
-        :id="'age-' + id"
+        :id="'age-' + modelValue.id"
         :value="modelValue.age"
         @change="updateAge($event.target.value)"
         class="personal__input personal__input--number"
@@ -39,6 +41,7 @@ export default {
         return {
           name: "",
           age: null,
+          id: null,
         };
       },
     },
@@ -47,12 +50,6 @@ export default {
   emits: {
     "update:modelValue": null,
     "delete-child": null,
-  },
-
-  data() {
-    return {
-      id: null,
-    };
   },
 
   methods: {
