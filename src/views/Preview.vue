@@ -1,5 +1,6 @@
 <template>
   <div class="preview">
+    <div>Введите данные во вкладке "Форма"</div>
     <div v-if="personalData.name !== '' && personalData.age !== null">
       <h2 class="preview__title">Персональные данные</h2>
       <p class="preview__desc">
@@ -33,6 +34,14 @@ export default {
     };
   },
 
+  computed: {
+    normalizedChildrenData() {
+      return this.childrenData.filter(
+        (item) => item.name !== "" && item.age !== null
+      );
+    },
+  },
+
   created() {
     const personalData = localStorage.getItem("personal-data");
     const childrenData = localStorage.getItem("children-data");
@@ -45,31 +54,21 @@ export default {
     }
   },
 
-  computed: {
-    normalizedChildrenData() {
-      return this.childrenData.filter(
-        (item) => item.name !== "" && item.age !== null
-      );
-    },
-  },
-
   methods: {
     normalizeAge(value) {
-      let txt;
-      let count = value % 100;
-      if (count >= 5 && count <= 20) {
-        txt = "лет";
-      } else {
-        count = count % 10;
-        if (count == 1) {
-          txt = "год";
-        } else if (count >= 2 && count <= 4) {
-          txt = "года";
-        } else {
-          txt = "лет";
-        }
+      if (value % 100 >= 5 && value % 100 <= 20) {
+        return `${value} лет`;
       }
-      return `${value} ${txt}`;
+
+      if (value % 10 === 1) {
+        return `${value} год`;
+      }
+
+      if (value % 10 >= 2 && value % 10 <= 4) {
+        return `${value} года`;
+      }
+
+      return `${value} лет`;
     },
   },
 };

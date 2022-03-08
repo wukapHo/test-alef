@@ -4,8 +4,8 @@
     <div class="personal__item">
       <label class="personal__label" for="name">Имя</label>
       <input
-        ref="input"
         :value="modelValue.name"
+        ref="input"
         @input="
           $emit('update:modelValue', {
             ...modelValue,

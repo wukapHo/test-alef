@@ -3,9 +3,9 @@
     <div class="child__input">
       <label :for="'name-' + modelValue.id" class="personal__label">Имя</label>
       <input
-        ref="input"
         :id="'name-' + modelValue.id"
         :value="modelValue.name"
+        ref="input"
         @input="
           $emit('update:modelValue', {
             ...modelValue,

@@ -6,9 +6,9 @@
       <h2 class="children__title">Дети (макс. {{ maxChildren }})</h2>
       <button
         v-if="childrenData.length < maxChildren"
-        @click="addChild"
         :disabled="isDisabled"
         :title="title"
+        @click="addChild"
         class="children__add-btn"
       >
         Добавить ребенка
@@ -50,25 +50,6 @@ export default {
     };
   },
 
-  created() {
-    const personalData = localStorage.getItem("personal-data");
-    const childrenData = localStorage.getItem("children-data");
-
-    if (personalData) {
-      this.personalData = JSON.parse(personalData);
-    }
-    if (childrenData) {
-      this.childrenData = JSON.parse(childrenData);
-    }
-
-    if (!this.personalData) {
-      this.personalData = { ...this.personalDataDefault };
-    }
-    if (!this.childrenData) {
-      this.childrenData = [...this.childrenDataDefault];
-    }
-  },
-
   computed: {
     isDisabled() {
       if (this.childrenData.length === 0) return false;
@@ -91,6 +72,41 @@ export default {
     },
   },
 
+  watch: {
+    personalData() {
+      localStorage.setItem("personal-data", JSON.stringify(this.personalData));
+    },
+    childrenData: {
+      deep: true,
+
+      handler() {
+        localStorage.setItem(
+          "children-data",
+          JSON.stringify(this.childrenData)
+        );
+      },
+    },
+  },
+
+  created() {
+    const personalData = localStorage.getItem("personal-data");
+    const childrenData = localStorage.getItem("children-data");
+
+    if (personalData) {
+      this.personalData = JSON.parse(personalData);
+    }
+    if (childrenData) {
+      this.childrenData = JSON.parse(childrenData);
+    }
+
+    if (!this.personalData) {
+      this.personalData = { ...this.personalDataDefault };
+    }
+    if (!this.childrenData) {
+      this.childrenData = [...this.childrenDataDefault];
+    }
+  },
+
   methods: {
     addChild() {
       const id = Math.floor(Math.random() * 9999);
@@ -106,22 +122,6 @@ export default {
       this.childrenData = [...this.childrenDataDefault];
       localStorage.removeItem("personal-data");
       localStorage.removeItem("children-data");
-    },
-  },
-
-  watch: {
-    personalData() {
-      localStorage.setItem("personal-data", JSON.stringify(this.personalData));
-    },
-    childrenData: {
-      deep: true,
-
-      handler() {
-        localStorage.setItem(
-          "children-data",
-          JSON.stringify(this.childrenData)
-        );
-      },
     },
   },
 };
