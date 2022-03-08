@@ -84,8 +84,8 @@ export default {
 
 <style lang="scss">
 .preview {
-  max-width: 616px;
   margin: 0 auto;
+  max-width: 616px;
   padding-top: 30px;
 
   &__title {
@@ -110,10 +110,10 @@ export default {
   }
 
   &__child {
-    height: 44px;
-    padding: 10px 20px;
     margin-top: 20px;
     display: inline-block;
+    height: 44px;
+    padding: 10px 20px;
     background: #f1f1f1;
     border-radius: 5px;
   }

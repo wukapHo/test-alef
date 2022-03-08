@@ -129,12 +129,12 @@ export default {
 
 <style lang="scss">
 .children {
-  max-width: 616px;
   margin: 0 auto;
+  max-width: 616px;
 
   &__wrapper {
-    height: 44px;
     display: flex;
+    height: 44px;
     align-items: center;
     justify-content: space-between;
   }
@@ -148,11 +148,11 @@ export default {
     width: 204px;
     height: 44px;
     padding-left: 30px;
+    color: #01a7fd;
     border: 2px solid #01a7fd;
     border-radius: 100px;
     background: transparent url("../assets/plus-icon.svg") no-repeat center left
       15px;
-    color: #01a7fd;
     cursor: pointer;
     transition: 0.3s;
 
@@ -171,17 +171,17 @@ export default {
 }
 
 .save {
-  max-width: 616px;
   margin: 30px auto;
+  max-width: 616px;
 
   &__btn {
     width: 118px;
     height: 44px;
-    background: #01a7fd;
+    color: #ffffff;
     border: none;
     border-radius: 100px;
     outline: none;
-    color: #ffffff;
+    background: #01a7fd;
     cursor: pointer;
     transition: 0.3s;
 

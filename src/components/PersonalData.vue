@@ -69,8 +69,8 @@ export default {
 
   methods: {
     validationName(data) {
-      if (data.length > 20) {
-        data = data.slice(0, 21);
+      if (data.length > 40) {
+        data = data.slice(0, 41);
       }
       this.$emit("update:modelValue", { ...this.modelValue, name: data });
     },
@@ -88,8 +88,8 @@ export default {
 
 <style lang="scss">
 .personal {
-  max-width: 616px;
   margin: 30px auto;
+  max-width: 616px;
 
   &__title {
     margin-bottom: 20px;
@@ -98,11 +98,11 @@ export default {
   }
 
   &__item {
+    margin-top: 10px;
+    display: flex;
     width: 100%;
     height: 56px;
     padding: 8px 16px;
-    margin-top: 10px;
-    display: flex;
     flex-direction: column;
     border: 1px solid #f1f1f1;
     border-radius: 4px;

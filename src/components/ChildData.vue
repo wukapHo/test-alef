@@ -95,17 +95,17 @@ export default {
 
 <style lang="scss">
 .child {
-  width: 100%;
   margin-top: 10px;
   display: flex;
+  width: 100%;
   align-items: center;
 
   &__input {
+    margin-right: 18px;
+    display: flex;
     width: 42%;
     height: 56px;
     padding: 8px 16px;
-    margin-right: 18px;
-    display: flex;
     flex-direction: column;
     border: 1px solid #f1f1f1;
     border-radius: 4px;

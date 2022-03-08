@@ -20,39 +20,37 @@ export default {
 </script>
 
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap");
-
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  list-style: none;
   font-family: "Montserrat", sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 24px;
   color: #111111;
+  list-style: none;
   text-decoration: none;
 }
 
 .line {
+  position: absolute;
   width: 100%;
   height: 76px;
-  position: absolute;
   box-shadow: 0px 1px 0px rgba(17, 17, 17, 0.1);
 }
 
 .container {
+  margin: 0 auto;
   max-width: 1366px;
   min-height: calc(100vh - 76px);
   padding: 0 20px;
-  margin: 0 auto;
 }
 
 .footer {
+  display: flex;
   width: 100%;
   height: 76px;
-  display: flex;
   align-items: center;
   justify-content: center;
   background: #fafafa;

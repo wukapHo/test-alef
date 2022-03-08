@@ -113,12 +113,12 @@ export default {
 
 <style lang="scss">
 .header {
+  position: relative;
+  display: flex;
   width: 100%;
   height: 76px;
-  display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
 
   @media (max-width: 768px) {
     justify-content: flex-end;
