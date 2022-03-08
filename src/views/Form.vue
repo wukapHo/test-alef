@@ -83,7 +83,8 @@ export default {
     reset() {
       this.personalData = { name: "", age: null };
       this.childrenData = [];
-      localStorage.clear();
+      localStorage.removeItem("personal-data");
+      localStorage.removeItem("children-data");
     },
   },
 
