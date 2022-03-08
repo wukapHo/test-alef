@@ -18,6 +18,7 @@
         placeholder="Введите имя..."
       />
     </div>
+
     <div class="child__input">
       <label :for="'age-' + modelValue.id" class="personal__label">
         Возраст</label
@@ -37,6 +38,7 @@
         placeholder="Введите возраст..."
       />
     </div>
+
     <button @click="deleteChild" class="child__delete-btn">
       <span class="to-be-hidden">Удалить</span>
     </button>

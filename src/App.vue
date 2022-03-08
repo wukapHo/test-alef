@@ -2,22 +2,19 @@
   <div class="line"></div>
   <div class="container">
     <app-header />
-    <h1 class="visually-hidden">Alef Test</h1>
     <router-view />
   </div>
-  <app-footer />
+  <footer class="footer">all rights reserved</footer>
 </template>
 
 <script>
 import AppHeader from "./components/AppHeader.vue";
-import AppFooter from "./components/AppFooter.vue";
 
 export default {
   name: "App",
 
   components: {
     AppHeader,
-    AppFooter,
   },
 };
 </script>
@@ -52,14 +49,13 @@ export default {
   margin: 0 auto;
 }
 
-.visually-hidden {
-  position: absolute;
-  clip: rect(1px, 1px, 1px, 1px);
-  clip-path: inset(0px 0px 99.9% 99.9%);
-  overflow: hidden;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  border: 0;
+.footer {
+  width: 100%;
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fafafa;
+  box-shadow: 0px 1px 0px rgba(17, 17, 17, 0.1);
 }
 </style>

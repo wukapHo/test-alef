@@ -1,24 +1,28 @@
 <template>
   <personal-data v-model="personalData" />
+
   <section class="children">
     <div class="children__wrapper">
-      <h2 class="children__title">Дети (макс. 5)</h2>
+      <h2 class="children__title">Дети (макс. {{ maxChildren }})</h2>
       <button
         v-if="childrenData.length < maxChildren"
-        :disabled="isDisabled"
         @click="addChild"
+        :disabled="isDisabled"
+        :title="title"
         class="children__add-btn"
       >
         Добавить ребенка
       </button>
     </div>
+
     <child-data
       v-for="(child, idx) in childrenData"
       :key="child.id"
-      @delete-child="deleteChild($event)"
       v-model="childrenData[idx]"
+      @delete-child="deleteChild($event)"
     />
   </section>
+
   <div class="save">
     <button @click="reset" class="save__btn">Сбросить</button>
   </div>
@@ -38,8 +42,10 @@ export default {
 
   data() {
     return {
-      personalData: { name: "", age: null },
-      childrenData: [],
+      personalData: null,
+      personalDataDefault: { name: "", age: null },
+      childrenData: null,
+      childrenDataDefault: [],
       maxChildren: 5,
     };
   },
@@ -54,6 +60,13 @@ export default {
     if (childrenData) {
       this.childrenData = JSON.parse(childrenData);
     }
+
+    if (!this.personalData) {
+      this.personalData = { ...this.personalDataDefault };
+    }
+    if (!this.childrenData) {
+      this.childrenData = [...this.childrenDataDefault];
+    }
   },
 
   computed: {
@@ -65,15 +78,23 @@ export default {
 
       return false;
     },
+    title() {
+      if (this.childrenData.length) {
+        const { name, age } = this.childrenData[this.childrenData.length - 1];
+        if (!name) {
+          return "Введите имя ребёнка";
+        } else if (!age) {
+          return "Введите возраст ребёнка";
+        }
+      }
+      return "";
+    },
   },
 
   methods: {
     addChild() {
       const id = Math.floor(Math.random() * 9999);
-      this.childrenData = [
-        ...this.childrenData,
-        { name: "", age: null, id: id },
-      ];
+      this.childrenData = [...this.childrenData, { name: "", age: null, id }];
     },
     deleteChild(item) {
       this.childrenData = this.childrenData.filter(
@@ -81,8 +102,8 @@ export default {
       );
     },
     reset() {
-      this.personalData = { name: "", age: null };
-      this.childrenData = [];
+      this.personalData = { ...this.personalDataDefault };
+      this.childrenData = [...this.childrenDataDefault];
       localStorage.removeItem("personal-data");
       localStorage.removeItem("children-data");
     },

@@ -107,7 +107,7 @@
 
 <script>
 export default {
-  name: "HeaderApp",
+  name: "AppHeader",
 };
 </script>
 
