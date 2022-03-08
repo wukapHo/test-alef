@@ -1,12 +1,20 @@
 <template>
   <div class="preview">
-    <div>Введите данные во вкладке "Форма"</div>
+    <div
+      v-if="
+        (!personalData.name || !personalData.age) && childrenData.length === 0
+      "
+    >
+      Введите данные во вкладке "Форма".
+    </div>
+
     <div v-if="personalData.name !== '' && personalData.age !== null">
       <h2 class="preview__title">Персональные данные</h2>
       <p class="preview__desc">
         {{ personalData.name }}, {{ normalizeAge(personalData.age) }}
       </p>
     </div>
+
     <div v-if="normalizedChildrenData.length > 0">
       <h2 class="preview__title preview__title--bottom">Дети</h2>
       <div class="preview__children">
