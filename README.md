@@ -1,17 +1,5 @@
-# Test for Alef Development
-[Deploy Link](https://alef-test.netlify.app/).
+# Test task for Alef Development
+[Demo](https://alef-test.netlify.app/).
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
+![App screenshot](https://github.com/wukapHo/test-alef/raw/main/Screenshot_1.png)
+![App screenshot](https://github.com/wukapHo/test-alef/raw/main/Screenshot_2.png)
